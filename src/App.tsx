@@ -10,19 +10,19 @@ const App = () => {
 
     {
       path: '/',
-      element: <Home></Home>
+      element: <Home></Home>,
+      errorElement: <NotFound></NotFound>
     },
     {
-      path:'Register',
+      path:'/Register',
       element: <Register></Register>,
-      errorElement: <NotFound></NotFound>
+      
       
     }
   ])
   return (
     <div>
-    
-  <RouterProvider router={router}></RouterProvider>
+    <RouterProvider router={router}></RouterProvider>
   </div>
   )
   
