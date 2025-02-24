@@ -6,14 +6,17 @@ import { Box } from '@mui/material'
 const Home = () => {
   return (
     <Box>
-      <Link to="/register">  
-        <Fab variant="extended">
-          Register
-          <NavigationIcon sx={{ mr: 1 }} />
-        </Fab>
-      </Link>
+      <Fab 
+        component={Link}  // ✅ Makes Fab act like a Link
+        to="/register" 
+        variant="extended"
+      >
+        Register
+        <NavigationIcon sx={{ mr: 1 }} />
+      </Fab>
     </Box>
   )
 }
 
 export default Home
+
