@@ -20,14 +20,16 @@ const Todo = () => {
   }
 
   return (
-    <div>
-      <h1>Todo List {user ? `(Saved for ${user})` : '(Not Saved)'}</h1>
-      <TodoInput addTodo={addTodo} />
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>{todo}</li>
-        ))}
-      </ul>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="card shadow p-5 text-center" style={{ width: '100%', maxWidth: '500px' }}>
+        <h2 className="mb-4">Welcome, {user ? user : 'Guest'}!</h2>
+        <TodoInput addTodo={addTodo} />
+        <ul className="list-group mt-4">
+          {todos.map((todo, index) => (
+            <li key={index} className="list-group-item text-start">{todo}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
@@ -43,14 +45,15 @@ const TodoInput = ({ addTodo }: { addTodo: (todo: string) => void }) => {
   }
 
   return (
-    <div>
+    <div className="input-group">
       <input
-        type='text'
-        placeholder='Add new todo'
+        type="text"
+        className="form-control"
+        placeholder="Add new todo"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={handleAdd}>Add Todo</button>
+      <button className="btn btn-primary" onClick={handleAdd}>Add</button>
     </div>
   )
 }

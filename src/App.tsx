@@ -3,6 +3,8 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Todo from './components/Todo'
 
+
+
 function App() {
   return (
     <Router>
@@ -16,3 +18,6 @@ function App() {
 }
 
 export default App
+
+
+
