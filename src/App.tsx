@@ -3,8 +3,10 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Todo from './components/Todo'
 
+import './App.css'
 
 
+ 
 function App() {
   return (
     <Router>
