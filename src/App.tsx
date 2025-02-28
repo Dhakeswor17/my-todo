@@ -1,25 +1,17 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import NotFound from './pages/NotFound'
 import Register from './pages/Register'
+import Todo from './components/Todo'
 
-const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home></Home>,
-      errorElement: <NotFound></NotFound>,
-    },
-    {
-      path: '/register', // ✅ Changed "Register" to lowercase
-      element: <Register></Register>,
-    },
-  ])
-
+function App() {
   return (
-    <div>
-      <RouterProvider router={router}></RouterProvider>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/Register' element={<Register />} />
+        <Route path='/Todo' element={<Todo />} />
+      </Routes>
+    </Router>
   )
 }
 
