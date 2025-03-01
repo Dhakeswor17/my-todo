@@ -13,6 +13,7 @@ src/
 │   ├── Todo.tsx
 │   ├── TodoInput.tsx
 │   ├── Delete.tsx
+│   ├── Edit.tsx
 ├── pages/
 │   ├── Home.tsx
 │   ├── Register.tsx
