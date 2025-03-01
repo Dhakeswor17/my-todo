@@ -7,9 +7,13 @@ This is a simple **Todo App** built using **React** and **TypeScript**, demonstr
 ## 📂 Project Structure
 
 src/
+src/
 ├── components/
 │   ├── Todo.tsx
+│   ├── TodoInput.tsx
 │   ├── Delete.tsx
+│   ├── DueDate.tsx
+│   ├── Edit.tsx
 ├── pages/
 │   ├── Home.tsx
 │   ├── Register.tsx
