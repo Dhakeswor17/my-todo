@@ -6,14 +6,13 @@ This is a simple **Todo App** built using **React** and **TypeScript**, demonstr
 
 ## 📂 Project Structure
 
+
 src/
 src/
 ├── components/
 │   ├── Todo.tsx
 │   ├── TodoInput.tsx
 │   ├── Delete.tsx
-│   ├── DueDate.tsx
-│   ├── Edit.tsx
 ├── pages/
 │   ├── Home.tsx
 │   ├── Register.tsx
@@ -31,8 +30,6 @@ src/
 ✅ Delete any todo from the list  
 ✅ All UI is centered beautifully in the middle of the page  
 ✅ Navigation between Home, Register, and Todo pages  
-
----
 
 ## 🚀 Getting Started
 
