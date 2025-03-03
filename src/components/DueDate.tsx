@@ -1,16 +1,19 @@
 import { useState } from 'react'
 
 interface DueDateProps {
-  setDueDate: (date: string) => void
-}
+    index: number;
+    dueDate: string;  
+    setDueDate: (index: number, date: string) => void;
+  }
+  
 
-const DueDate = ({ setDueDate }: DueDateProps) => {
+const DueDate = ({ index, setDueDate }: DueDateProps) => {
   const [date, setDate] = useState('')
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value
     setDate(newDate)
-    setDueDate(newDate) // Pass selected date to parent (Todo.tsx)
+    setDueDate(index, newDate)
   }
 
   return (
