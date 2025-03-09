@@ -4,14 +4,20 @@ interface DueDateProps {
     index: number;
     dueDate: string;  
     setDueDate: (index: number, date: string) => void;
-  }
-  
+}
 
-const DueDate = ({ index, setDueDate }: DueDateProps) => {
-  const [date, setDate] = useState('')
+const DueDate = ({ index, dueDate, setDueDate }: DueDateProps) => {
+  const [date, setDate] = useState(dueDate)
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value
+    const today = new Date().toISOString().split('T')[0]
+
+    if (newDate < today) {
+      alert('You cannot schedule a task for a past date.')
+      return
+    }
+
     setDate(newDate)
     setDueDate(index, newDate)
   }
@@ -24,6 +30,7 @@ const DueDate = ({ index, setDueDate }: DueDateProps) => {
         className="form-control"
         value={date}
         onChange={handleDateChange}
+        min={new Date().toISOString().split('T')[0]} // Set min date to today
       />
     </div>
   )
