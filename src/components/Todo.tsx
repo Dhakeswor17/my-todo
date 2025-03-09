@@ -3,8 +3,6 @@ import Delete from './Delete'
 import DueDate from './DueDate'
 import Edit from './Edit'
 
-
-
 const Todo = () => {
   const [todos, setTodos] = useState<string[]>([])
   const [dueDates, setDueDates] = useState<string[]>([])
@@ -59,6 +57,12 @@ const Todo = () => {
     }
   }
 
+  const isOverdue = (dueDate: string) => {
+    const today = new Date()
+    const due = new Date(dueDate)
+    return due < today
+  }
+
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="card shadow p-5 text-center" style={{ width: '100%', maxWidth: '500px' }}>
@@ -66,7 +70,12 @@ const Todo = () => {
         <TodoInput addTodo={addTodo} />
         <ul className="list-group mt-4">
           {todos.map((todo, index) => (
-            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+            <li
+              key={index}
+              className={`list-group-item d-flex justify-content-between align-items-center ${
+                isOverdue(dueDates[index]) ? 'text-danger text-decoration-line-through' : ''
+              }`}
+            >
               <div className="text-start">
                 {todo}
                 <DueDate index={index} dueDate={dueDates[index] || ''} setDueDate={setDueDate} />
