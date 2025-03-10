@@ -1,67 +1,67 @@
-import { useState, useEffect } from 'react'
-import Delete from './Delete'
-import DueDate from './DueDate'
-import Edit from './Edit'
+import { useState, useEffect } from 'react';
+import Delete from './Delete';
+import DueDate from './DueDate';
+import Edit from './Edit';
 
 const Todo = () => {
-  const [todos, setTodos] = useState<string[]>([])
-  const [dueDates, setDueDates] = useState<string[]>([])
-  const user = localStorage.getItem('todoUser')
+  const [todos, setTodos] = useState<string[]>([]);
+  const [dueDates, setDueDates] = useState<string[]>([]);
+  const user = localStorage.getItem('todoUser');
 
   useEffect(() => {
     if (user) {
-      const savedTodos = JSON.parse(localStorage.getItem(`${user}_todos`) || '[]')
-      const savedDueDates = JSON.parse(localStorage.getItem(`${user}_dueDates`) || '[]')
+      const savedTodos = JSON.parse(localStorage.getItem(`${user}_todos`) || '[]');
+      const savedDueDates = JSON.parse(localStorage.getItem(`${user}_dueDates`) || '[]');
 
-      setTodos(savedTodos)
-      setDueDates(savedDueDates)
+      setTodos(savedTodos);
+      setDueDates(savedDueDates);
     }
-  }, [user])
+  }, [user]);
 
-  const addTodo = (newTodo: string) => {
-    const updatedTodos = [...todos, newTodo]
-    const updatedDueDates = [...dueDates, '']
+  const addTodo = (newTodo: string, newDueDate: string = '') => {
+    const updatedTodos = [...todos, newTodo];
+    const updatedDueDates = [...dueDates, newDueDate];
 
-    setTodos(updatedTodos)
-    setDueDates(updatedDueDates)
+    setTodos(updatedTodos);
+    setDueDates(updatedDueDates);
 
-    saveToLocalStorage(updatedTodos, updatedDueDates)
-  }
+    saveToLocalStorage(updatedTodos, updatedDueDates);
+  };
 
   const deleteTodo = (index: number) => {
-    const updatedTodos = todos.filter((_, i) => i !== index)
-    const updatedDueDates = dueDates.filter((_, i) => i !== index)
+    const updatedTodos = todos.filter((_, i) => i !== index);
+    const updatedDueDates = dueDates.filter((_, i) => i !== index);
 
-    setTodos(updatedTodos)
-    setDueDates(updatedDueDates)
+    setTodos(updatedTodos);
+    setDueDates(updatedDueDates);
 
-    saveToLocalStorage(updatedTodos, updatedDueDates)
-  }
+    saveToLocalStorage(updatedTodos, updatedDueDates);
+  };
 
   const updateTodo = (index: number, newTodo: string) => {
-    const updatedTodos = todos.map((todo, i) => (i === index ? newTodo : todo))
-    setTodos(updatedTodos)
-    saveToLocalStorage(updatedTodos, dueDates)
-  }
+    const updatedTodos = todos.map((todo, i) => (i === index ? newTodo : todo));
+    setTodos(updatedTodos);
+    saveToLocalStorage(updatedTodos, dueDates);
+  };
 
   const setDueDate = (index: number, date: string) => {
-    const updatedDueDates = dueDates.map((d, i) => (i === index ? date : d))
-    setDueDates(updatedDueDates)
-    saveToLocalStorage(todos, updatedDueDates)
-  }
+    const updatedDueDates = dueDates.map((d, i) => (i === index ? date : d));
+    setDueDates(updatedDueDates);
+    saveToLocalStorage(todos, updatedDueDates);
+  };
 
   const saveToLocalStorage = (updatedTodos: string[], updatedDueDates: string[]) => {
     if (user) {
-      localStorage.setItem(`${user}_todos`, JSON.stringify(updatedTodos))
-      localStorage.setItem(`${user}_dueDates`, JSON.stringify(updatedDueDates))
+      localStorage.setItem(`${user}_todos`, JSON.stringify(updatedTodos));
+      localStorage.setItem(`${user}_dueDates`, JSON.stringify(updatedDueDates));
     }
-  }
+  };
 
   const isOverdue = (dueDate: string) => {
-    const today = new Date()
-    const due = new Date(dueDate)
-    return due < today
-  }
+    const today = new Date();
+    const due = new Date(dueDate);
+    return due < today;
+  };
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
@@ -89,21 +89,23 @@ const Todo = () => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const TodoInput = ({ addTodo }: { addTodo: (todo: string) => void }) => {
-  const [input, setInput] = useState('')
+const TodoInput = ({ addTodo }: { addTodo: (todo: string, dueDate: string) => void }) => {
+  const [input, setInput] = useState('');
+  const [dueDate, setDueDate] = useState('');
 
   const handleAdd = () => {
     if (input.trim()) {
-      addTodo(input)
-      setInput('')
+      addTodo(input, dueDate);
+      setInput('');
+      setDueDate('');
     }
-  }
+  };
 
   return (
-    <div className="input-group">
+    <div className="input-group mb-3">
       <input
         type="text"
         className="form-control"
@@ -111,11 +113,17 @@ const TodoInput = ({ addTodo }: { addTodo: (todo: string) => void }) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+      <input
+        type="date"
+        className="form-control"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+      />
       <button className="btn btn-primary" onClick={handleAdd}>
         Add
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default Todo
+export default Todo;
