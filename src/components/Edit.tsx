@@ -1,19 +1,23 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 interface EditProps {
-  index: number
-  todo: string
-  updateTodo: (index: number, newTodo: string) => void
+  index: number;
+  todo: string;
+  updateTodo: (index: number, newTodo: string) => void;
 }
 
 const Edit = ({ index, todo, updateTodo }: EditProps) => {
-  const [isEditing, setIsEditing] = useState(false)
-  const [newText, setNewText] = useState(todo)
+  const [isEditing, setIsEditing] = useState(false);
+  const [newText, setNewText] = useState(todo);
 
   const handleSave = () => {
-    updateTodo(index, newText)
-    setIsEditing(false)
-  }
+    if (newText.trim()) {
+      updateTodo(index, newText); // Save the updated todo
+      setIsEditing(false); // Exit edit mode
+    } else {
+      alert('Todo cannot be empty!'); // Validation for empty input
+    }
+  };
 
   return (
     <div className="d-inline ms-2">
@@ -28,7 +32,13 @@ const Edit = ({ index, todo, updateTodo }: EditProps) => {
           <button className="btn btn-success btn-sm ms-2" onClick={handleSave}>
             Save
           </button>
-          <button className="btn btn-secondary btn-sm ms-2" onClick={() => setIsEditing(false)}>
+          <button
+            className="btn btn-secondary btn-sm ms-2"
+            onClick={() => {
+              setIsEditing(false); // Cancel edit mode without saving
+              setNewText(todo); // Reset the input to the original todo text
+            }}
+          >
             Cancel
           </button>
         </>
@@ -38,7 +48,7 @@ const Edit = ({ index, todo, updateTodo }: EditProps) => {
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Edit
+export default Edit;
